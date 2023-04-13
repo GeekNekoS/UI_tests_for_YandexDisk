@@ -26,7 +26,8 @@ class Locators:
     COPIED_FILE = (By.XPATH, "//div[@class='listing__items']/.//div[@aria-label='Файл для копирования.docx']")
     DELETE = (By.XPATH, "//span[text()='Удалить']")
     LOG_OUT = (By.XPATH, "//img[@class='user-pic__image']")
-    LOG_OUT_BUTTON = (By.XPATH, "//span[text()='Выйти']")
+    #
+    LOG_OUT_BUTTON = (By.XPATH, "//*[text()='Выйти']")  # //*[text()='Выйти']  # //span[text()='Выйти']
 
     SCREEN = (By.XPATH, "//div[@class='listing-item listing-item_theme_tile-empty listing-item_size_m']")
     NEW_FOLDER = (By.XPATH, "//span[text()='Новая папка']")
@@ -36,12 +37,14 @@ class Locators:
     FOLDER_FOR_TXT = (By.XPATH, "//div[@aria-label='Новая папка для текстового файла']")
     FILE_UPLOAD = (By.XPATH, "//span[text()='Загрузить файлы']")
     MY_FILE = (By.XPATH, "//div[@aria-label='My_file.txt']")
-
     WEB_FILE_CONTENT = (By.XPATH, "//div[@class='b1']/.//p/.")
-    # //div[@class='__page-1']/.//p/.
 
 
 class YandexDisk(BaseClass):
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.window_handles = None
+
     def enter_login(self, login):
         return self.find_element(Locators.LOGIN_INPUT, time=self.time).send_keys(login)
 
@@ -122,10 +125,14 @@ class YandexDisk(BaseClass):
 
         # time.sleep(3)  # Для прогрузки файла
 
-    def verify_the_contents_of_files(self):
-        web_file_content = self.find_elements(Locators.WEB_FILE_CONTENT, time=self.time)
+    def compare_files(self):
+        self.driver.switch_to.window(self.driver.window_handles[1])
 
-        for line in web_file_content:
-            LOGGER.info(f'{line.text}')
+        web_file = self.find_elements(Locators.WEB_FILE_CONTENT, time=self.time)
+        web_file_content = [line.text for line in web_file]
 
-        # driver.window_handles[arr.index(channel)+1]
+        with open("My_file.txt", "r", encoding="utf-8") as file:
+            lines = file.readlines()
+            my_file_content = [line.rstrip() for line in lines]
+
+        return web_file_content, my_file_content

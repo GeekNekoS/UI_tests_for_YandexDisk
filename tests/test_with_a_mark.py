@@ -27,5 +27,10 @@ def test_with_a_mark(driver):
     LOGGER.info('Opening an inserted text file')
     yandex_main_page.open_file()
 
-    LOGGER.info('Comparing data in files')
-    yandex_main_page.verify_the_contents_of_files()  #
+    web_file_content, my_file_content = yandex_main_page.compare_files()
+    assert web_file_content == my_file_content
+
+    LOGGER.info('Go back to the page where you can log out of your profile')
+    yandex_main_page.go_to_yandex_disk_page()
+
+    time.sleep(5)
