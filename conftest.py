@@ -1,8 +1,9 @@
-import pytest
 from selenium import webdriver
 from Page_Object import YandexDisk
 import logging
+import pytest
 import time
+import os
 
 
 LOGGER = logging.getLogger(__name__)
@@ -21,13 +22,13 @@ def driver():
     # Установить параметр входа по почте
 
     LOGGER.info('Login entered')
-    yandex_main_page.enter_login(" [login] ")  # <== your login
+    yandex_main_page.enter_login(os.environ["LOGIN"])
 
     LOGGER.info('The login button is pressed')
     yandex_main_page.click_on_the_login_button()
 
     LOGGER.info('Password entered')
-    yandex_main_page.enter_password(" [password] ")  # <== your password
+    yandex_main_page.enter_password(os.environ["PASSWORD"])
 
     LOGGER.info('The login button is pressed')
     yandex_main_page.click_on_the_login_button()
