@@ -36,7 +36,9 @@ class Locators:
     FOLDER_FOR_TXT = (By.XPATH, "//div[@aria-label='Новая папка для текстового файла']")
     FILE_UPLOAD = (By.XPATH, "//span[text()='Загрузить файлы']")
     MY_FILE = (By.XPATH, "//div[@aria-label='My_file.txt']")
-    WEB_FILE_CONTENT = (By.XPATH, "//div[@class='__page-1']/.//p/.")
+
+    WEB_FILE_CONTENT = (By.XPATH, "//div[@class='b1']/.//p/.")
+    # //div[@class='__page-1']/.//p/.
 
 
 class YandexDisk(BaseClass):
@@ -111,17 +113,19 @@ class YandexDisk(BaseClass):
         time.sleep(1)  # Для корректного открытия окна для загрузки файлов
         pyautogui.write(os.getcwd() + "\My_file.txt", interval=0.005)
         pyautogui.press('return')
-        time.sleep(5)  # Подождать, пока файл загрузится
+        time.sleep(3)  # Для ожидания загрузки файла
 
-    def open_filee(self):
+    def open_file(self):
         action = ActionChains(self.driver)
         screen = self.find_element(Locators.MY_FILE, time=self.time)
-        action.double_click(screen).perform()
+        return action.double_click(screen).perform()
 
-        time.sleep(5)
+        # time.sleep(3)  # Для прогрузки файла
 
     def verify_the_contents_of_files(self):
         web_file_content = self.find_elements(Locators.WEB_FILE_CONTENT, time=self.time)
 
         for line in web_file_content:
             LOGGER.info(f'{line.text}')
+
+        # driver.window_handles[arr.index(channel)+1]

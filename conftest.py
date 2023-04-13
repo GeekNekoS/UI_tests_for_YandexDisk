@@ -1,9 +1,9 @@
 from selenium import webdriver
 from Page_Object import YandexDisk
+from settings import *
 import logging
 import pytest
 import time
-import os
 
 
 LOGGER = logging.getLogger(__name__)

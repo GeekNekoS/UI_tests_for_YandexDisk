@@ -25,7 +25,7 @@ def test_with_a_mark(driver):
     yandex_main_page.load_txt_file()
 
     LOGGER.info('Opening an inserted text file')
-    yandex_main_page.open_filee()
+    yandex_main_page.open_file()
 
     LOGGER.info('Comparing data in files')
     yandex_main_page.verify_the_contents_of_files()  #
