@@ -1,6 +1,5 @@
 from Page_Object import YandexDisk
 import logging
-import time
 
 
 LOGGER = logging.getLogger(__name__)
