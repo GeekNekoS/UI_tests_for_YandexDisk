@@ -32,5 +32,3 @@ def test_with_a_mark(driver):
 
     LOGGER.info('Go back to the page where you can log out of your profile')
     yandex_main_page.go_to_yandex_disk_page()
-
-    time.sleep(5)
