@@ -1,5 +1,6 @@
 from selenium import webdriver
-from Page_Object import YandexDisk
+from Page_Object import DiskPage
+from Page_Object import LoginPage
 from settings import *
 import logging
 import pytest
@@ -14,7 +15,7 @@ def driver():
     driver = webdriver.Chrome()
 
     LOGGER.info('The browser opens on the main page')
-    yandex_main_page = YandexDisk(driver)
+    yandex_main_page = LoginPage(driver)
 
     LOGGER.info('The auth page opens')
     yandex_main_page.go_to_auth_page()

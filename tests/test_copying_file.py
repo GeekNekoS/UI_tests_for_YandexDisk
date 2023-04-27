@@ -1,4 +1,4 @@
-from Page_Object import YandexDisk
+from Page_Object import DiskPage
 import logging
 
 
@@ -8,7 +8,7 @@ LOGGER = logging.getLogger(__name__)
 def test_copying_files(driver):
     # Authorization
     LOGGER.info('Precondition - authorization')
-    yandex_main_page = YandexDisk(driver)
+    yandex_main_page = DiskPage(driver)
 
     # Work with Yandex disk
     LOGGER.info('The yandex disk page opens')
