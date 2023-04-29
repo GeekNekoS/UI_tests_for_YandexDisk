@@ -1,10 +1,12 @@
 from Page_Object import DiskPage
 import logging
+import pytest
 
 
 LOGGER = logging.getLogger(__name__)
 
 
+# @pytest.mark.usefixtures("auth")
 def test_copying_files(driver):
     # Authorization
     LOGGER.info('Precondition - authorization')
